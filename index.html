@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SISTEMA DE INVERSIÓN TECNOLÓGICA v1.0</title>
+    <title>SISTEMA DE INVERSIÓN TECNOLÓGICA XD V1.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     
@@ -17,316 +16,150 @@
             color: #e0e6ed;
             margin: 0;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            perspective: 1200px;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden; perspective: 1200px;
         }
 
         #bg-stars {
-            position: absolute;
-            width: 100%; height: 100%;
+            position: absolute; width: 100%; height: 100%;
             background: url('https://i.postimg.cc/T34S4S6G/stars.png') repeat;
-            opacity: 0.25;
-            animation: moveStars 120s linear infinite;
-            z-index: -1;
+            opacity: 0.25; animation: moveStars 120s linear infinite; z-index: -1;
         }
         @keyframes moveStars { from { background-position: 0 0; } to { background-position: 2000px 2000px; } }
 
         #device {
-            width: 390px;
-            height: 820px;
-            background: #05070a;
-            border: 20px solid #1a1a1a;
-            border-radius: 65px;
+            width: 390px; height: 820px;
+            background: #05070a; border: 20px solid #1a1a1a; border-radius: 65px;
             box-shadow: 0 0 100px rgba(0, 240, 255, 0.4), inset 0 0 30px rgba(0, 240, 255, 0.2);
-            overflow: hidden;
-            position: relative;
-            transform: rotateX(2deg);
+            overflow: hidden; position: relative;
         }
 
-        .page {
-            display: none;
-            flex-direction: column;
-            height: 100%;
-            padding: 45px 28px;
-            background: radial-gradient(circle at center, #0d1117 0%, #010204 100%);
-        }
-
+        .page { display: none; flex-direction: column; height: 100%; padding: 45px 28px; background: radial-gradient(circle at center, #0d1117 0%, #010204 100%); }
         .active { display: flex; animation: pageSlideIn 0.7s cubic-bezier(0.19, 1, 0.22, 1); }
         @keyframes pageSlideIn { from { opacity: 0; transform: scale(1.1) translateY(30px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
         .neon-blue { text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff; }
-        .neon-green { text-shadow: 0 0 10px #10b981, 0 0 20px #10b981; }
         .neon-amber { text-shadow: 0 0 10px #f59e0b, 0 0 20px #f59e0b; }
 
         .cyber-card {
-            background: rgba(0, 240, 255, 0.03);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(0, 240, 255, 0.15);
-            border-radius: 24px;
-            padding: 22px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            position: relative;
+            background: rgba(0, 240, 255, 0.03); backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 240, 255, 0.15); border-radius: 24px;
+            padding: 22px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
 
         .cyber-input {
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #00f0ff;
-            color: #00f0ff;
-            padding: 20px;
-            border-radius: 16px;
-            font-size: 1.4rem;
-            text-align: center;
-            width: 100%;
-            letter-spacing: 2px;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+            background: rgba(0, 0, 0, 0.8); border: 2px solid #00f0ff; color: #00f0ff;
+            padding: 20px; border-radius: 16px; font-size: 1.4rem; text-align: center; width: 100%;
         }
 
         .cyber-btn {
-            padding: 22px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-radius: 16px;
-            font-size: 1.1rem;
-            letter-spacing: 1.5px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            padding: 22px; font-weight: 700; text-transform: uppercase; border-radius: 16px;
+            font-size: 1.1rem; transition: all 0.4s; position: relative; overflow: hidden;
         }
-        .cyber-btn:hover { filter: brightness(1.2); box-shadow: 0 0 30px rgba(0, 240, 255, 0.3); }
-        .cyber-btn:active { transform: scale(0.95); }
 
-        .btn-shine {
-            position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shine 3s infinite;
-        }
-        @keyframes shine { 100% { left: 200%; } }
+        .spec-item { display: flex; justify-content: space-between; font-size: 11px; padding: 6px 0; border-bottom: 1px solid rgba(0, 240, 255, 0.1); }
+        .spec-label { color: #00f0ff; font-weight: bold; }
 
         /* Custom Slider Naranja */
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
         input[type=range]::-webkit-slider-runnable-track { height: 12px; background: #111; border-radius: 10px; border: 1px solid #ff9100; }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; height: 32px; width: 32px; border-radius: 50%;
-            background: #ff9100; cursor: pointer; margin-top: -11px;
-            box-shadow: 0 0 20px #ff9100, inset 0 0 10px rgba(255,255,255,0.8);
-            border: 2px solid #fff;
-        }
-
-        .floating { animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 32px; width: 32px; border-radius: 50%; background: #ff9100; margin-top: -11px; box-shadow: 0 0 20px #ff9100; border: 2px solid #fff; }
 
         .modal { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 100; padding: 40px 30px; flex-direction: column; justify-content: center; }
         .modal.active { display: flex; }
-
-        .scan-line {
-            width: 100%; height: 2px; background: rgba(0, 240, 255, 0.2);
-            position: absolute; top: 0; left: 0;
-            animation: scan 4s linear infinite;
-        }
-        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
-
-        .stat-badge { font-size: 9px; padding: 4px 8px; border-radius: 4px; background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0, 240, 255, 0.2); }
     </style>
 </head>
 <body>
     <div id="bg-stars"></div>
-
     <div id="device">
-        <div class="scan-line"></div>
-
-        <!-- P1: LOGIN -->
         <div id="p1" class="page active">
             <div class="mt-12 text-center">
-                <div class="w-24 h-24 mx-auto bg-cyan-500/10 rounded-full flex items-center justify-center border border-cyan-500/30 mb-8 floating">
-                    <i class="fa-solid fa-key text-cyan-400 text-4xl neon-blue"></i>
-                </div>
-                <h1 class="text-4xl font-bold text-cyan-400 neon-blue tracking-tighter">HI AUNT</h1>
-                <p class="text-slate-500 text-xs mt-4 uppercase tracking-[0.3em]">Encrypted Session v4.6</p>
+                <i class="fa-solid fa-terminal text-cyan-400 text-6xl mb-8 neon-blue"></i>
+                <h1 class="text-4xl font-bold text-cyan-400 neon-blue">HI AUNT</h1>
+                <p class="text-slate-400 text-sm mt-8">PLEASE ENTER PASSWORD</p>
             </div>
-            
-            <div class="flex-1 flex flex-col justify-center space-y-4">
-                <p class="text-center text-slate-400 text-sm">PLEASE ENTER PASSWORD</p>
+            <div class="flex-1 flex flex-col justify-center">
                 <input type="password" id="pass" class="cyber-input" placeholder="••••••••">
             </div>
-
-            <button onclick="login()" class="cyber-btn bg-cyan-600 text-white w-full">
-                <div class="btn-shine"></div>
-                AUTHORIZE ACCESS
-            </button>
+            <button onclick="login()" class="cyber-btn bg-cyan-600 text-white w-full">AUTHORIZE ACCESS</button>
         </div>
 
-        <!-- P2: PRESENTATION MESSAGE -->
         <div id="p2" class="page">
-            <div class="flex items-center gap-3 mb-8">
-                <div class="w-10 h-10 bg-cyan-500 rounded-lg flex items-center justify-center text-white font-bold">C</div>
-                <div>
-                    <h2 id="greet" class="text-xl font-bold text-white tracking-tight"></h2>
-                    <div class="flex gap-2 mt-1">
-                        <span class="stat-badge">SYSTEM ACTIVE</span>
-                        <span class="stat-badge text-cyan-400">DEV MODE</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cyber-card bg-cyan-950/20 border-cyan-500/40 relative">
-                <i class="fa-solid fa-quote-left absolute top-4 left-4 text-cyan-500/20 text-4xl"></i>
-                <p class="text-[13px] leading-relaxed text-slate-200 font-medium px-4 py-2 italic">
+            <h2 id="greet" class="text-xl font-bold text-white mb-6"></h2>
+            <div class="cyber-card bg-cyan-950/20 border-cyan-500/40">
+                <p class="text-[13px] leading-relaxed text-slate-200 italic">
                     "HOLA TIA COMO SABES YA VOY A ENTRAR ALA PREPA Y OCUPO UNA COMPUTADORA PARA LOS TRABAJOS AL IGUAL QUE SI NO SABÍAN ESTOY APRENDIENDO A PROGRAMAR Y ESTO ES UNO DE MIS TRABAJOS LA VERDAD AMO ESTO Y POR ESO LES PIDO SU AYUDA PARA QUE ME AYUDEN A COMPRAR UNA COMPUTADORA 🔥"
                 </p>
             </div>
-
-            <div class="mt-8 space-y-3">
-                <div class="flex items-center gap-3 text-[10px] text-slate-500">
-                    <i class="fa-solid fa-check-circle text-cyan-500"></i>
-                    <span>CODING ENVIRONMENT READY</span>
-                </div>
-                <div class="flex items-center gap-3 text-[10px] text-slate-500">
-                    <i class="fa-solid fa-check-circle text-cyan-500"></i>
-                    <span>ACADEMIC DATABASE CONNECTED</span>
-                </div>
-            </div>
-
-            <button onclick="show(3)" class="cyber-btn bg-gradient-to-r from-cyan-600 to-blue-700 text-white w-full mt-auto">
-                CONTINUE
-            </button>
+            <button onclick="show(3)" class="cyber-btn bg-gradient-to-r from-cyan-600 to-blue-700 text-white w-full mt-auto">CONTINUE</button>
         </div>
 
-        <!-- P3: HOW ARE YOU -->
         <div id="p3" class="page justify-center items-center">
-            <h2 class="text-3xl font-bold text-center text-white mb-12">HOW ARE YOU TODAY?</h2>
+            <h2 class="text-3xl font-bold text-white mb-12">HOW ARE YOU TODAY?</h2>
             <div class="w-full space-y-5">
-                <button onclick="step(4,1)" class="cyber-btn border-2 border-emerald-500 text-emerald-400 w-full flex justify-between items-center">
-                    <span>Fine, thanks</span>
-                    <i class="fa-solid fa-heart neon-green"></i>
-                </button>
-                <button onclick="step(4,2)" class="cyber-btn border-2 border-amber-500 text-amber-400 w-full flex justify-between items-center">
-                    <span>A little tired but happy</span>
-                    <i class="fa-solid fa-star neon-amber"></i>
-                </button>
+                <button onclick="step(4,1)" class="cyber-btn border-2 border-emerald-500 text-emerald-400 w-full">Fine, thanks</button>
+                <button onclick="step(4,2)" class="cyber-btn border-2 border-amber-500 text-amber-400 w-full">A little tired but happy</button>
             </div>
         </div>
 
-        <!-- P4: RESPONSE -->
         <div id="p4" class="page">
             <div class="flex-1 flex flex-col justify-center items-center">
-                <div class="cyber-card w-full border-emerald-500/30 p-10 text-center">
-                    <i class="fa-solid fa-comment-dots text-4xl text-emerald-500 mb-6 neon-green"></i>
+                <div class="cyber-card w-full border-emerald-500/30 p-8 text-center">
                     <div id="status-msg" class="text-emerald-400 text-xl font-bold leading-tight"></div>
                 </div>
             </div>
             <button onclick="show(5)" class="cyber-btn bg-emerald-600 text-white w-full mt-auto">SEE PROPOSAL 🔥</button>
         </div>
 
-        <!-- P5: THE LAPTOP -->
         <div id="p5" class="page">
-            <div class="text-center mb-8">
-                <h3 class="text-2xl font-bold text-cyan-400 neon-blue uppercase tracking-widest">The Tool</h3>
-                <p class="text-[9px] text-slate-500 mt-1">OPTIMIZED FOR DEVELOPMENT & STUDIES</p>
+            <h3 class="text-xl font-bold text-cyan-400 neon-blue mb-4 text-center uppercase">Workstation Specs</h3>
+            <div class="cyber-card p-4 border-cyan-500/20">
+                <img src="https://i.postimg.cc/BL5sMHK5/images-(9).jpg" class="w-full h-36 object-contain mb-4 rounded-lg">
+                <div class="space-y-1">
+                    <div class="spec-item"><span class="spec-label">MODELO:</span><span>LENOVO PRO STATION V2</span></div>
+                    <div class="spec-item"><span class="spec-label">PROCESADOR:</span><span>INTEL CORE i7 (ULTRA)</span></div>
+                    <div class="spec-item"><span class="spec-label">MEMORIA:</span><span>24 GB DDR5 RAM</span></div>
+                    <div class="spec-item"><span class="spec-label">ALMACENAMIENTO:</span><span>1 TB SSD NVMe</span></div>
+                    <div class="spec-item"><span class="spec-label">GRÁFICOS:</span><span>NVIDIA RTX SERIES</span></div>
+                    <div class="spec-item"><span class="spec-label">PANTALLA:</span><span>144Hz FHD + EYE CARE</span></div>
+                </div>
+                <p class="text-2xl font-bold text-emerald-400 text-center mt-4">$25,775 MXN</p>
+                <p class="text-[10px] text-slate-400 italic mt-3 text-center">"Sí, es cara tía, pero si tú me apoyas con algo, cada maldito peso valdrá la pena. Esta computadora me ayudará hasta terminar la prepa.</p>
             </div>
-
-            <div class="cyber-card p-0 border-cyan-500/20 overflow-hidden">
-                <div class="p-6 bg-slate-900/40 text-center border-b border-cyan-500/10">
-                    <img src="https://p2-ofp.static.pub/fes/cms/2023/02/16/8v6c9v6q6h6v6q6h6v6q6h6v6q6h6v374521.png" class="w-full h-36 object-contain mb-4 drop-shadow-[0_0_20px_rgba(0,240,255,0.4)]">
-                    <h4 class="text-lg font-bold text-white tracking-widest">LENOVO PRO STATION</h4>
-                </div>
-                
-                <div class="grid grid-cols-2 gap-px bg-cyan-500/10">
-                    <div class="bg-black/60 p-4 text-center">
-                        <p class="text-[10px] text-cyan-500 font-bold uppercase mb-1">Ram Memory</p>
-                        <p class="text-sm font-bold text-white">24 GB DDR5</p>
-                    </div>
-                    <div class="bg-black/60 p-4 text-center">
-                        <p class="text-[10px] text-cyan-500 font-bold uppercase mb-1">Fluidity</p>
-                        <p class="text-sm font-bold text-white">144Hz DISPLAY</p>
-                    </div>
-                </div>
-
-                <div class="p-6 text-center">
-                    <p class="text-3xl font-bold text-emerald-400 mb-4">$25,775 MXN</p>
-                    <div class="bg-black/30 p-4 rounded-xl border border-white/5">
-                        <p class="text-[11px] text-slate-300 italic leading-relaxed">
-                            "Sí, es cara tía, pero si tú me apoyas con algo, cada maldito peso valdrá la pena. Esta computadora me ayudará hasta terminar la prepa."
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
             <button onclick="show(6)" class="cyber-btn bg-gradient-to-r from-emerald-600 to-cyan-600 text-white w-full mt-auto">MY PROPOSAL 🤝</button>
         </div>
 
-        <!-- P6: THE DEAL (POB) -->
         <div id="p6" class="page">
-            <h3 class="text-3xl font-bold text-center text-orange-500 neon-amber mb-10">THE DEAL</h3>
-            
-            <div class="space-y-6">
-                <div class="cyber-card border-emerald-500/30 bg-emerald-950/10">
-                    <p class="text-sm leading-relaxed text-slate-200">
-                        "SI SACO PROMEDIO DE 10 EN LAS MAYORÍA DE MATERIAS ME AYUDAS CON EL DINERO PARA COMPRÁRLA YO TE MANDARÉ UNA FOTO DE LAS CALIFICACIONES AL TERMINAR EL TRIMESTRE"
-                    </p>
+            <h3 class="text-3xl font-bold text-center text-orange-500 neon-amber mb-8 uppercase">The Deal</h3>
+            <div class="space-y-5">
+                <div class="cyber-card border-emerald-500/30">
+                    <p class="text-[13px] text-slate-200">"SI SACO PROMEDIO DE 10 EN LAS MAYORÍA DE MATERIAS ME AYUDAS CON EL DINERO PARA COMPRÁRLA YO TE MANDARÉ UNA FOTO DE LAS CALIFICACIONES AL TERMINAR EL TRIMESTRE"</p>
                 </div>
-
                 <div class="cyber-card border-cyan-500/20 bg-cyan-950/10">
-                    <p class="text-xs text-slate-400 italic">
-                        "LO DEMÁS MIS PAPÁS ME PODRÍAN AYUDAR CON ALGO DE DINERO PERO SI ME AYUDARÍA MUCHO QUE USTEDES ME APOYEN EN LA COMPRA DE MI COMPUTADORA"
-                    </p>
+                    <p class="text-[11px] text-slate-400 italic">"LO DEMÁS MIS PAPÁS ME PODRÍAN AYUDAR CON ALGO DE DINERO PERO SI ME AYUDARÍA MUCHO QUE USTEDES ME APOYEN EN LA COMPRA DE MI COMPUTADORA"</p>
                 </div>
             </div>
-
-            <button onclick="openSupportModal()" class="cyber-btn bg-gradient-to-r from-pink-600 to-purple-700 text-white w-full mt-auto">
-                <div class="btn-shine"></div>
-                I ACCEPT THE DEAL! 🎉
-            </button>
+            <button onclick="openSupportModal()" class="cyber-btn bg-gradient-to-r from-pink-600 to-purple-700 text-white w-full mt-auto">I ACCEPT THE DEAL! 🎉</button>
         </div>
 
-        <!-- SUPPORT MODAL -->
         <div id="support-modal" class="modal">
-            <div class="text-center mb-10">
-                <h3 class="text-3xl font-bold text-orange-500 neon-amber">PERFECTO</h3>
-                <p class="text-slate-400 mt-2 text-sm">¿Con cuánto dinero me gustas apoyar?</p>
+            <h3 class="text-3xl font-bold text-orange-500 text-center neon-amber">PERFECTO</h3>
+            <p class="text-slate-400 mt-2 text-center text-sm">¿Con cuánto dinero me gustas apoyar?</p>
+            <div class="cyber-card bg-black/60 p-8 text-center my-8 border-orange-500/20">
+                <div class="text-5xl mb-4">💰</div>
+                <div class="text-5xl font-bold text-white neon-amber" id="amount-display">$1,000</div>
             </div>
-            
-            <div class="cyber-card bg-black/60 p-10 text-center mb-8 border-orange-500/20">
-                <div id="money-emoji" class="text-5xl floating">💰</div>
-                <div class="text-5xl font-bold text-white mt-8 neon-amber" id="amount-display">$1,000</div>
-                <p class="text-[10px] text-emerald-500 mt-2 uppercase font-bold tracking-[0.2em]">Investment Fund</p>
-            </div>
-
-            <div class="px-2">
-                <input type="range" id="amount-slider" min="1000" max="10000" step="500" value="1000" oninput="updateAmount(this.value)">
-                <div class="flex justify-between text-[10px] text-slate-500 mt-4 font-bold">
-                    <span>MIN: $1,000</span>
-                    <span>MAX: $10,000</span>
-                </div>
-            </div>
-
-            <div class="mt-10">
-                <p class="text-[10px] text-slate-500 uppercase ml-1 mb-2 font-bold">Message (Optional)</p>
-                <textarea id="support-msg" class="cyber-input h-24 text-sm text-left" placeholder="Good luck at school!"></textarea>
-            </div>
-
-            <button onclick="sendToWebhook()" id="send-btn" class="cyber-btn bg-emerald-600 text-white w-full mt-10">CONFIRM & SEND 🚀</button>
-            <button onclick="closeSupportModal()" class="text-slate-600 text-xs mt-4 text-center w-full">BACK</button>
+            <input type="range" id="amount-slider" min="1000" max="10000" step="500" value="1000" oninput="updateAmount(this.value)">
+            <textarea id="support-msg" class="cyber-input h-24 text-sm mt-8" placeholder="Escribe un mensaje..."></textarea>
+            <button onclick="sendToWebhook()" id="send-btn" class="cyber-btn bg-emerald-600 text-white w-full mt-8">CONFIRM & SEND 🚀</button>
         </div>
-        
-        <!-- P7: FINAL -->
+
         <div id="p7" class="page justify-center items-center text-center">
-            <div class="relative mb-12">
-                <div class="w-32 h-32 rounded-full bg-emerald-500/10 border-2 border-emerald-500 flex items-center justify-center neon-green">
-                    <i class="fa-solid fa-check text-6xl text-emerald-400"></i>
-                </div>
-                <div class="absolute -top-4 -right-4 text-5xl">🎓</div>
+            <div class="w-32 h-32 rounded-full border-2 border-emerald-500 flex items-center justify-center neon-green mb-8">
+                <i class="fa-solid fa-check text-6xl text-emerald-400"></i>
             </div>
-            
-            <h2 class="text-4xl font-bold text-emerald-400 neon-green">THANKS, AUNT! ❤️</h2>
-            <div class="cyber-card mt-8 max-w-[280px]">
-                <p class="text-sm text-slate-300 leading-relaxed italic">
-                    Tu apoyo ha sido registrado. Prometo dar lo mejor de mí para enviar esa foto con puros 10s al final del trimestre.
-                </p>
-            </div>
-            <button onclick="location.reload()" class="mt-auto text-[10px] text-slate-700 uppercase tracking-widest">Close Security Session</button>
+            <h2 class="text-4xl font-bold text-emerald-400 neon-blue">THANKS, AUNT! ❤️</h2>
+            <p class="text-slate-400 mt-6 text-sm italic">Tu apoyo ha sido registrado. ¡Prometo esos dieces!</p>
         </div>
     </div>
 
@@ -334,63 +167,37 @@
         let userName = "";
         const WEBHOOK_URL = "https://discord.com/api/webhooks/1491657056686571540/CRJs0yxAdBGDf9xu-ViXGb-o9kz92f6JhZcl37n-K8yq6EbCKlm2dwuNZ39TL_3eIMMp";
 
-        function show(n) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('p' + n).classList.add('active');
-        }
+        function show(n) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById('p' + n).classList.add('active'); }
 
         function login() {
             const key = document.getElementById('pass').value.trim().toUpperCase();
             if (key === "L-7K2P9XZ") userName = "Luisa";
             else if (key === "A-4M8N3VW") userName = "Andrea";
             else if (key === "P-5R1V6") userName = "Pau";
-            else return alert("⚠️ WRONG PASSWORD. ACCESS DENIED.");
+            else return alert("❌ WRONG PASSWORD");
             document.getElementById('greet').textContent = `WELCOME, AUNT ${userName.toUpperCase()}`;
             show(2);
         }
 
         function step(page, choice) {
             const msg = document.getElementById('status-msg');
-            msg.innerHTML = choice === 1 ? "¡Qué alegría tía! Me da mucho gusto...<br><br>Mira esta propuesta para mi futuro!" : "Ánimo tía, valdrá la pena el esfuerzo...<br><br>¡Mira esta herramienta para mis estudios!";
+            msg.innerHTML = choice === 1 ? "¡Qué alegría tía! Me da mucho gusto...<br><br>Mira esta herramienta para mis estudios!" : "Ánimo tía, valdrá la pena el esfuerzo...<br><br>¡Mira esta herramienta para mis estudios!";
             show(page);
         }
 
         function openSupportModal() { document.getElementById('support-modal').classList.add('active'); }
-        function closeSupportModal() { document.getElementById('support-modal').classList.remove('active'); }
         function updateAmount(val) { document.getElementById('amount-display').textContent = `$${Number(val).toLocaleString()}`; }
 
         async function sendToWebhook() {
             const amount = document.getElementById('amount-slider').value;
             const message = document.getElementById('support-msg').value;
             const btn = document.getElementById('send-btn');
-            btn.disabled = true; btn.textContent = "UPLOADING TO DATABASE...";
-
-            const payload = {
-                username: "Academic Investment Bot",
-                embeds: [{
-                    title: "🎓 NUEVO COMPROMISO ACADÉMICO REGISTRADO",
-                    color: 3066993,
-                    thumbnail: { url: "https://p2-ofp.static.pub/fes/cms/2023/02/16/8v6c9v6q6h6v6q6h6v6q6h6v6q6h6v374521.png" },
-                    fields: [
-                        { name: "Inversionista:", value: `Tía ${userName}`, inline: true },
-                        { name: "Monto de Apoyo:", value: `$${Number(amount).toLocaleString()} MXN`, inline: true },
-                        { name: "Promesa Codex:", value: "Enviar foto de calificaciones con promedio de 10 al terminar el trimestre.", inline: false },
-                        { name: "Mensaje de la Tía:", value: message || "*Sin mensaje*" }
-                    ],
-                    footer: { text: "Terminal Codex v4.6 | Security Active" },
-                    timestamp: new Date()
-                }]
-            };
-
-            try {
-                await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                closeSupportModal();
-                show(7);
-            } catch (e) {
-                alert("Error de conexión. Intenta de nuevo.");
-                btn.disabled = false; btn.textContent = "CONFIRM & SEND 🚀";
-            }
+            btn.disabled = true; btn.textContent = "SENDING...";
+            const payload = { embeds: [{ title: "✅ APOYO REGISTRADO", color: 3066993, fields: [{ name: "Inversionista", value: `Tía ${userName}`, inline: true }, { name: "Monto", value: `$${Number(amount).toLocaleString()} MXN`, inline: true }, { name: "Mensaje", value: message || "Sin mensaje" }] }] };
+            await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            show(7);
         }
     </script>
 </body>
 </html>
+
