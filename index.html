@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SISTEMA DE INVERSIÓN TECNOLÓGICA V1.0</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <style>
         :root {
@@ -31,7 +34,7 @@
             overflow: hidden;
         }
 
-        /* ── STARS BG ── */
+        /* ── STARS BACKGROUND ── */
         #bg-stars {
             position: fixed; inset: 0;
             background: url('https://i.postimg.cc/T34S4S6G/stars.png') repeat;
@@ -41,7 +44,7 @@
         }
         @keyframes moveStars { to { background-position: 2000px 2000px; } }
 
-        /* ── DEVICE SHELL ── */
+        /* ── INTERFACE DEVICE CONTAINER ── */
         #device {
             width: min(390px, 100vw);
             height: min(820px, 100dvh);
@@ -54,7 +57,7 @@
             z-index: 1;
         }
 
-        /* ── PAGES ── */
+        /* ── CARD INTERCHANGE PAGES ── */
         .page {
             display: none;
             flex-direction: column;
@@ -75,7 +78,7 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── COMMON COMPONENTS ── */
+        /* ── UI INTERACTIVE STYLES ── */
         .section-label {
             font-family: 'Share Tech Mono', monospace;
             font-size: 9px;
@@ -114,6 +117,10 @@
             box-shadow: var(--orange-glow);
             transition: transform .15s, box-shadow .15s;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         .btn-primary:hover   { transform: translateY(-1px); box-shadow: 0 0 28px rgba(255,102,0,.7); }
         .btn-primary:active  { transform: translateY(0); }
@@ -124,7 +131,7 @@
         }
         .neon { text-shadow: 0 0 12px var(--orange), 0 0 24px var(--orange); }
 
-        /* ── PAGE 0: BOOT LOADER ── */
+        /* ── BOOT SYSTEM LOADER ── */
         #page-0 {
             justify-content: center;
             align-items: center;
@@ -158,7 +165,6 @@
             margin-bottom: 32px;
         }
 
-        /* progress bar */
         .progress-wrap {
             width: 100%;
             height: 3px;
@@ -182,7 +188,7 @@
             margin-bottom: 32px;
         }
 
-        /* ── PAGE 0B: ACCESS ── */
+        /* ── ACCESS SELECTION ── */
         #page-0b {
             justify-content: center;
             gap: 0;
@@ -220,7 +226,7 @@
         select.styled:focus { outline: none; border-color: var(--orange); box-shadow: var(--orange-glow); }
         select.styled option { background: #0d1117; }
 
-        /* ── PAGE 1: MENSAJE ── */
+        /* ── CONTEXT DISPLAY ── */
         #page-1 { gap: 12px; }
         .msg-bubble {
             background: rgba(255,102,0,0.05);
@@ -238,7 +244,7 @@
             display: block;
         }
 
-        /* ── PAGE 2: VIDEO ── */
+        /* ── VIDEO CONTAINER ── */
         #page-2 { gap: 14px; }
         .video-wrap {
             position: relative; width: 100%;
@@ -252,7 +258,7 @@
             width: 100%; height: 100%; border: none;
         }
 
-        /* ── PAGE 3: ESTRELLAS ── */
+        /* ── RATING STARS ── */
         #page-3 { gap: 14px; }
         .star-row {
             display: flex; justify-content: center; gap: 14px;
@@ -288,7 +294,7 @@
             margin-bottom: 4px; display: block;
         }
 
-        /* ── PAGE 4: PROPUESTA ── */
+        /* ── OVERVIEW PROPOSAL ── */
         #page-4 { gap: 12px; }
         .reason-card {
             background: rgba(255,102,0,0.04);
@@ -306,7 +312,7 @@
             line-height: 1.6;
         }
 
-        /* ── PAGE 5: GRACIAS ── */
+        /* ── CLOSING / SUCCESS SCREEN ── */
         #page-5 {
             justify-content: center; align-items: center;
             text-align: center; gap: 0;
@@ -339,7 +345,7 @@
             50%      { transform: translateY(-6px); }
         }
 
-        /* ── TOAST ── */
+        /* ── HUD FLOATING TOAST ── */
         #toast {
             position: fixed; bottom: 32px; left: 50%;
             transform: translateX(-50%) translateY(80px);
@@ -398,8 +404,7 @@
         <div class="section-label">Presentación</div>
         <div class="divider"></div>
         <div class="video-wrap">
-            <iframe src="https://www.youtube.com/embed/QWNoqk6-fIw?rel=0&modestbranding=1"
-                    title="Video Presentación" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/QWNoqk6-fIw?rel=0&modestbranding=1" title="Video Presentación" allowfullscreen></iframe>
         </div>
         <button class="btn-primary" onclick="cambiarPagina('3')">
             Calificar el video <i class="fa-solid fa-star"></i>
@@ -426,8 +431,7 @@
 
         <div style="margin-bottom:12px;">
             <label class="field-label">Tu opinión sobre la edición:</label>
-            <textarea id="opinionEdicionInput" class="styled" rows="4"
-                      placeholder="Escribe aquí lo que piensas sobre el video..."></textarea>
+            <textarea id="opinionEdicionInput" class="styled" rows="4" placeholder="Escribe aquí lo que piensas sobre el video..."></textarea>
         </div>
 
         <div style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.2); border-radius:12px; padding:12px 14px; margin-bottom:14px;">
@@ -438,7 +442,7 @@
         </div>
 
         <button class="btn-primary" onclick="enviarWebhookEdicion()" id="btnSubmitEdicion">
-            <i class="fa-solid fa-paper-plane"></i>&nbsp; Enviar y continuar
+            <i class="fa-solid fa-paper-plane"></i> Enviar y continuar
         </button>
     </div>
 
@@ -467,12 +471,11 @@
 
         <div style="margin-bottom:12px;">
             <label class="field-label">Tu opinión, duda o consejo final:</label>
-            <textarea id="opinionPropuestaInput" class="styled" rows="3"
-                      placeholder="Escribe tus dudas, consejos u opinión final..."></textarea>
+            <textarea id="opinionPropuestaInput" class="styled" rows="3" placeholder="Escribe tus dudas, consejos u opinión final..."></textarea>
         </div>
 
         <button class="btn-primary btn-amber" onclick="enviarWebhookPropuesta()" id="btnSubmitPropuesta">
-            <i class="fa-solid fa-check-double"></i>&nbsp; Enviar opinión final
+            <i class="fa-solid fa-check-double"></i> Enviar opinión final
         </button>
 
         <p style="font-size:9px; color:#444; text-align:center; margin-top:10px; font-style:italic; letter-spacing:.5px; line-height:1.6;">
@@ -486,7 +489,7 @@
         <div class="confetti-line">✨ 🙏 ✨</div>
         <p class="thanks-body" id="thanksBody">
             Tu opinión fue recibida con éxito.<br>
-            
+            Significas mucho para mí. ❤️
         </p>
     </div>
 
@@ -501,19 +504,165 @@
     const webhookUrlEdicion = "https://discord.com/api/webhooks/1491367258470219796/PApu8j67Mnz9GN8JK6vqPCiNlaZvoqnEG9GBEjSBEOXAawRGc_UY-EMXVNnenDxzUjlr";
     const webhookUrlPropuesta = "https://discord.com/api/webhooks/1491657056686571540/CRJs0yxAdBGDf9xu-ViXGb-o9kz92f6JhZcl37n-K8yq6EbCKlm2dwuNZ39TL_3eIMMp";
 
-    // Simulación de carga protegida
-    document.addEventListener('DOMContentLoaded', () => {
-        const bar = document.getElementById('progressBar');
-        const label = document.getElementById('progressLabel');
-        if(!bar || !label) return;
+    // Inicializador asíncronamente seguro del Loader Core
+    (function() {
+        function ejecutarCarga() {
+            const bar = document.getElementById('progressBar');
+            const label = document.getElementById('progressLabel');
+            if(!bar || !label) return;
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 12) + 6;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => cambiarPagina('0b'), 200);
+                }
+                bar.style.width = progress + '%';
+                label.innerText = `INICIALIZANDO MÓDULOS... ${progress}%`;
+            }, 50);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', ejecutarCarga);
+        } else {
+            ejecutarCarga();
+        }
+    })();
+
+    function cambiarPagina(idPagina) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        const target = document.getElementById(`page-${idPagina}`);
+        if(target) target.classList.add('active');
+    }
+
+    function showToast(text) {
+        const toast = document.getElementById('toast');
+        if(!toast) return;
+        toast.innerText = text;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    function iniciarSistema(nombreTia) {
+        tiaSeleccionada = nombreTia;
+        const msgContainer = document.getElementById('mensajeOriginalContainer');
+        if(!msgContainer) return;
         
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += Math.floor(Math.random() * 12) + 5;
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(interval);
-                setTimeout(() => cambiarPagina('0b'), 300);
+        if (nombreTia === "Luisa") {
+            msgContainer.innerHTML = `
+                <span class="greeting">Hola tía Luisa,</span>
+                Como sabes, hace poco te envié mi propuesta para adquirir una computadora. He estado analizando bien la situación y llegué a una conclusión, pero además, como me gusta mucho editar, preparé un video para explicarte todo mejor. Aquí te lo dejo 😵‍💫
+            `;
+        } else if (nombreTia === "Pau" || nombreTia === "Andrea") {
+            msgContainer.innerHTML = `
+                <span class="greeting">Hola tía ${nombreTia},</span>
+                Les pongo en contexto: hace poco le envié a la tía Luisa mi propuesta y el plan para comprar una computadora que necesito para la prepa, y ahora también necesito mucho de su ayuda y apoyo para lograrlo.<br><br>
+                He estado pensando y analizando todo, y llegué a una conclusión, pero se las explico mejor en este video que preparé —¡ya saben que me encanta editar! Es el mismo video que le envié a Luisa, y funciona con el mismo sistema de calificación de estrellas y comentarios.
+            `;
+        }
+        
+        document.getElementById('thanksTitle').innerText = `¡GRACIAS TÍA ${nombreTia.toUpperCase()}!`;
+        document.getElementById('thanksBody').innerHTML = `Tu opinión e informe final fueron transmitidos con éxito.<br>¡Significas muchísimo para mí! ❤️`;
+        
+        cambiarPagina('1');
+    }
+
+    function marcarEstrellas(calificacion) {
+        estrellasMarcadas = calificacion;
+        const labels = ["MALA", "REGULAR", "BUENA", "EXCELENTE", "¡OBRA MAESTRA! 🔥"];
+        document.getElementById('starLabel').innerText = labels[calificacion - 1];
+        
+        const estrellas = document.querySelectorAll('.star-row .star-btn');
+        estrellas.forEach(star => {
+            const v = parseInt(star.getAttribute('data-v'));
+            if (v <= calificacion) {
+                star.className = "fa-solid fa-star star-btn lit";
+            } else {
+                star.className = "fa-regular fa-star star-btn";
             }
-            bar.style.width = progress + '%';
-            label.innerText = `INICIALIZANDO MÓDULOS... ${pro 
+        });
+    }
+
+    async function enviarWebhookEdicion() {
+        const opinion = document.getElementById('opinionEdicionInput').value;
+
+        if (estrellasMarcadas === 0 || !opinion.trim()) {
+            alert("Por favor selecciona una calificación en estrellas y escribe tu opinión del video.");
+            return;
+        }
+
+        const payload = {
+            username: "Sistema de Calificación de Edición",
+            content: `**NUEVA EVALUACIÓN DE VIDEO**\n\nTía: Tía ${tiaSeleccionada}\nEstrellas: ${"⭐".repeat(estrellasMarcadas)} (${estrellasMarcadas}/5)\nOpinión: ${opinion}`
+        };
+
+        const btn = document.getElementById('btnSubmitEdicion');
+        btn.disabled = true;
+        btn.innerText = "TRANSMITIENDO DATOS...";
+
+        try {
+            const res = await fetch(webhookUrlEdicion, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (res.ok) {
+                showToast("MÓDULO 1 ENVIADO CON ÉXITO");
+                cambiarPagina('4');
+            } else {
+                alert("Error en la conexión con el servidor de Discord.");
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Enviar y continuar`;
+            }
+        } catch (err) {
+            alert("Error de red.");
+            btn.disabled = false;
+            btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Enviar y continuar`;
+        }
+    }
+
+    async function enviarWebhookPropuesta() {
+        const opinion = document.getElementById('opinionPropuestaInput').value;
+
+        if (!opinion.trim()) {
+            alert("Por favor escribe tus dudas, consejos o tu opinión final sobre la propuesta.");
+            return;
+        }
+
+        const payload = {
+            username: "Sistema de Validaciones NEXUS",
+            content: `**NUEVO INFORME DE PROPUESTA RECIBIDO**\n\n**Remitente:** Tía ${tiaSeleccionada}\n**Dudas, Consejos u Opinión Final:** ${opinion}\n\n_Estatus Académico: Condicionado a excelentes notas escolares_ 🔥`
+        };
+
+        const btn = document.getElementById('btnSubmitPropuesta');
+        btn.disabled = true;
+        btn.innerText = "PROCESANDO DICTAMEN FINAL...";
+
+        try {
+            const res = await fetch(webhookUrlPropuesta, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (res.ok) {
+                showToast("SISTEMA COMPLETADO CON ÉXITO");
+                cambiarPagina('5');
+            } else {
+                alert("Error al enviar el reporte final.");
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-check-double"></i> Enviar opinión final`;
+            }
+        } catch (err) {
+            alert("Error de red.");
+            btn.disabled = false;
+            btn.innerHTML = `<i class="fa-solid fa-check-double"></i> Enviar opinión final`;
+        }
+    }
+</script>
+</body>
+</html> 
+    
