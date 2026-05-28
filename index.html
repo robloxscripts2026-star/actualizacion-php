@@ -362,9 +362,6 @@
 
 <div id="device">
 
-    <!-- ══════════════════════════════════════════
-         PAGE 0: BOOT / LOADING
-    ═══════════════════════════════════════════ -->
     <div id="page-0" class="page active">
         <div class="boot-logo"><i class="fa-solid fa-microchip"></i></div>
         <div class="boot-title">SISTEMA V1.0</div>
@@ -376,9 +373,6 @@
         <div class="progress-label" id="progressLabel">CARGANDO ACTUALIZACIÓN...</div>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         PAGE 0B: ACCESS / SELECT NAME
-    ═══════════════════════════════════════════ -->
     <div id="page-0b" class="page">
         <div class="access-icon"><i class="fa-solid fa-user-shield"></i></div>
         <div class="access-title">BIENVENIDA</div>
@@ -391,21 +385,15 @@
         </select>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         PAGE 1: MENSAJE PERSONALIZADO
-    ═══════════════════════════════════════════ -->
     <div id="page-1" class="page">
         <div class="section-label">Contexto</div>
         <div class="divider"></div>
-        <div class="msg-bubble" id="mensajeOriginalContainer"><!-- dynamic --></div>
+        <div class="msg-bubble" id="mensajeOriginalContainer"></div>
         <button class="btn-primary" onclick="cambiarPagina('2')">
             Ver presentación <i class="fa-solid fa-arrow-right ml-1"></i>
         </button>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         PAGE 2: VIDEO
-    ═══════════════════════════════════════════ -->
     <div id="page-2" class="page">
         <div class="section-label">Presentación</div>
         <div class="divider"></div>
@@ -418,14 +406,10 @@
         </button>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         PAGE 3: CALIFICACIÓN (Webhook 1)
-    ═══════════════════════════════════════════ -->
     <div id="page-3" class="page">
         <div class="section-label">Calificación del video</div>
         <div class="divider"></div>
 
-        <!-- stars -->
         <div class="cyber-card" style="padding:20px 16px; margin-bottom:12px;">
             <p style="font-size:12px; color:#9aa5b4; text-align:center; line-height:1.7; margin-bottom:16px;">
                 ¿Cómo te pareció el video? Deja tu calificación de 1 a 5 estrellas y tu opinión sobre la edición. 🎬
@@ -458,9 +442,6 @@
         </button>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         PAGE 4: PROPUESTA (Webhook 2)
-    ═══════════════════════════════════════════ -->
     <div id="page-4" class="page">
         <div class="section-label" style="color:var(--amber);">Mi propuesta</div>
         <div class="divider" style="background:linear-gradient(90deg,transparent,var(--amber),transparent);"></div>
@@ -499,9 +480,6 @@
         </p>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         PAGE 5: GRACIAS
-    ═══════════════════════════════════════════ -->
     <div id="page-5" class="page">
         <div class="thanks-icon">🎉</div>
         <div class="thanks-title" id="thanksTitle">¡GRACIAS!</div>
@@ -512,10 +490,28 @@
         </p>
     </div>
 
-</div><!-- /#device -->
-
-<!-- TOAST -->
-<div id="toast"></div>
+</div><div id="toast"></div>
 
 <script>
-    /* ─
+    let tiaSeleccionada = "";
+    let estrellasMarcadas = 0;
+
+    const webhookUrlEdicion = "https://discord.com/api/webhooks/1491367258470219796/PApu8j67Mnz9GN8JK6vqPCiNlaZvoqnEG9GBEjSBEOXAawRGc_UY-EMXVNnenDxzUjlr";
+    const webhookUrlPropuesta = "https://discord.com/api/webhooks/1491657056686571540/CRJs0yxAdBGDf9xu-ViXGb-o9kz92f6JhZcl37n-K8yq6EbCKlm2dwuNZ39TL_3eIMMp";
+
+    // Simulación de barra de carga cyber al inicio
+    window.addEventListener('DOMContentLoaded', () => {
+        const bar = document.getElementById('progressBar');
+        const label = document.getElementById('progressLabel');
+        let progress = 0;
+        
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 8) + 4;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                setTimeout(() => cambiarPagina('0b'), 400);
+            }
+            bar.style.width = progress + '%';
+            label.innerText = `INICIALIZANDO MÓDULOS... ${progress}%`;
+   
