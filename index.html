@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -35,7 +34,7 @@
             overflow: hidden; position: relative;
         }
 
-        .page { display: none; flex-direction: column; height: 100%; padding: 35px 24px; background: radial-gradient(circle at center, #0d1117 0%, #010204 100%); overflow-y: auto; }
+        .page { display: none; flex-direction: column; height: 100%; padding: 40px 24px; background: radial-gradient(circle at center, #0d1117 0%, #010204 100%); overflow-y: auto; }
         .active { display: flex; animation: pageSlideIn 0.4s ease-out; }
         @keyframes pageSlideIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -50,7 +49,7 @@
         }
 
         .short-container {
-            position: relative; width: 100%; padding-bottom: 95%; height: 0; overflow: hidden; border-radius: 16px;
+            position: relative; width: 100%; padding-bottom: 135%; height: 0; overflow: hidden; border-radius: 16px;
             border: 1px solid rgba(255, 102, 0, 0.25);
         }
         .short-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
@@ -64,10 +63,10 @@
 
     <div id="device">
 
-        <!-- PÁGINA 0: SELECTOR DE ACCESO -->
+        <!-- ACCESO OBLIGATORIO -->
         <div id="page-0" class="page active justify-center text-center">
             <h1 class="text-2xl font-bold tracking-wider text-[#ff6600] neon-orange mb-2">CONTROL DE ACCESO</h1>
-            <p class="text-xs text-gray-400 mb-6 uppercase tracking-widest">Elige tu nombre para ingresar</p>
+            <p class="text-xs text-gray-400 mb-6 uppercase tracking-widest">Identifícate para iniciar</p>
             <select id="tiaSelector" onchange="iniciarSistema(this.value)" class="w-full bg-[#0d1117] border-2 border-[#ff6600]/40 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#ff6600]">
                 <option value="" disabled selected>-- Selecciona tu nombre --</option>
                 <option value="Luisa">Tía Luisa</option>
@@ -76,47 +75,56 @@
             </select>
         </div>
 
-        <!-- PÁGINA 1: PRESENTACIÓN Y VIDEO -->
-        <div id="page-1" class="page justify-between gap-3">
+        <!-- PÁGINA 1: EL TEXTO -->
+        <div id="page-1" class="page justify-between gap-4">
             <div class="text-center">
-                <h2 class="text-sm font-bold text-[#ff6600] tracking-widest uppercase mb-1" id="panelTitle">PANEL DE CONTROL</h2>
+                <h2 class="text-xs font-bold text-[#ff6600] tracking-widest uppercase mb-1">PÁGINA 1: CONTEXTO</h2>
                 <div class="w-full h-[2px] bg-gradient-to-r from-transparent via-[#ff6600] to-transparent"></div>
             </div>
 
-            <!-- Contenedor del Mensaje Original Personalizado -->
-            <div class="cyber-card p-4 text-xs text-gray-200 leading-relaxed space-y-2 bg-black/40" id="mensajeOriginalContainer">
-                <!-- Se inyecta dinámicamente con JavaScript -->
+            <div class="cyber-card p-5 text-sm text-gray-200 leading-relaxed space-y-3 bg-black/40 my-auto" id="mensajeOriginalContainer">
+                <!-- Se inyecta dinámicamente -->
             </div>
 
-            <!-- Video Short Integrado -->
-            <div class="short-container">
-                <iframe src="https://www.youtube.com/embed/QWNoqk6-fIw?rel=0&modestbranding=1" title="Video Presentación" frameborder="0" allowfullscreen></iframe>
-            </div>
-
-            <button onclick="cambiarPagina(2)" class="w-full bg-[#ff6600] text-black font-bold text-xs py-3 rounded-xl shadow-[0_0_15px_rgba(255,102,0,0.3)] hover:bg-[#e05500] transition-all tracking-wider">
-                CONTINUAR AL PASO 1 <i class="fa-solid fa-arrow-right ml-1"></i>
+            <button onclick="cambiarPagina(2)" class="w-full bg-[#ff6600] text-black font-bold text-xs py-3 rounded-xl tracking-wider uppercase shadow-[0_0_15px_rgba(255,102,0,0.3)]">
+                Ir a Página 2: Ver Video <i class="fa-solid fa-arrow-right ml-1"></i>
             </button>
         </div>
 
-        <!-- PÁGINA 2: EVALUACIÓN DE LA EDICIÓN (WEBHOOK 1) -->
-        <div id="page-2" class="page justify-between gap-4">
+        <!-- PÁGINA 2: EL VÍDEO -->
+        <div id="page-2" class="page justify-between gap-3">
             <div class="text-center">
-                <h2 class="text-base font-bold text-[#ff6600] tracking-wider neon-orange">PASO 1: CALIFICAR VIDEO</h2>
-                <p class="text-[10px] text-gray-400 mt-1">SISTEMA EVALUADOR DE EDICIÓN</p>
+                <h2 class="text-xs font-bold text-[#ff6600] tracking-widest uppercase mb-1">PÁGINA 2: PRESENTACIÓN</h2>
+                <div class="w-full h-[2px] bg-gradient-to-r from-transparent via-[#ff6600] to-transparent"></div>
+            </div>
+
+            <div class="short-container my-auto">
+                <iframe src="https://www.youtube.com/embed/QWNoqk6-fIw?rel=0&modestbranding=1" title="Video Presentación" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <button onclick="cambiarPagina(3)" class="w-full bg-[#ff6600] text-black font-bold text-xs py-3 rounded-xl tracking-wider uppercase">
+                Ir a Página 3: Calificar <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
+        </div>
+
+        <!-- PÁGINA 3: LA CALIFICACIÓN (WEBHOOK 1) -->
+        <div id="page-3" class="page justify-between gap-4">
+            <div class="text-center">
+                <h2 class="text-xs font-bold text-[#ff6600] tracking-widest uppercase mb-1">PÁGINA 3: CALIFICACIÓN</h2>
+                <div class="w-full h-[2px] bg-gradient-to-r from-transparent via-[#ff6600] to-transparent"></div>
             </div>
 
             <div class="cyber-card p-4 space-y-4 my-auto flex flex-col justify-center">
                 <p class="text-xs text-gray-300 text-center leading-relaxed">
-                    Al finalizar el video, verás una sección donde puedes calificarlo de 1 a 5 estrellas y escribir tu opinión. Todo lo que escribas llegará directamente a mí.
+                    Al finalizar el video, verás una sección donde puedes calificarlo de 1 a 5 estrellas y escribir tu opinión. Todo lo que escribas llegará directamente a mí a través de este enlace:
                 </p>
-                <p class="text-[11px] text-amber-500 bg-amber-500/5 p-2 rounded-lg border border-amber-500/20 text-center italic">
-                    Note: En el espacio para escribir, por favor pon solo tu opinión sobre el video; más adelante podrás opinar también sobre la propuesta de lo que quiero.
+                <p class="text-[11px] text-amber-500 bg-amber-500/5 p-2.5 rounded-lg border border-amber-500/20 text-center font-bold">
+                    Nota: En el espacio para escribir, por favor pon solo tu opinión sobre el video; más adelante podrás opinar también sobre la propuesta de lo que quiero.
                 </p>
 
-                <!-- Control interactivo de Estrellas -->
+                <!-- Estrellas -->
                 <div class="text-center pt-2">
-                    <label class="text-[10px] uppercase font-bold tracking-wider text-gray-400 block mb-2">Selecciona las estrellas:</label>
-                    <div class="flex justify-center gap-3 text-2xl">
+                    <div class="flex justify-center gap-3 text-2xl mb-2">
                         <i class="fa-star fa-regular star-btn text-gray-600" data-value="1" onclick="marcarEstrellas(1)"></i>
                         <i class="fa-star fa-regular star-btn text-gray-600" data-value="2" onclick="marcarEstrellas(2)"></i>
                         <i class="fa-star fa-regular star-btn text-gray-600" data-value="3" onclick="marcarEstrellas(3)"></i>
@@ -126,29 +134,27 @@
                     <input type="hidden" id="starRatingInput" value="0">
                 </div>
 
-                <!-- Campo de texto -->
                 <div class="flex flex-col gap-1">
-                    <label class="text-[10px] uppercase font-bold text-gray-400">Tu opinión sobre la edición:</label>
-                    <textarea id="opinionEdicionInput" rows="3" placeholder="Escribe aquí tu opinión técnica de la edición..." class="w-full bg-[#0d1117] border border-gray-700 rounded-lg p-2.5 text-xs text-white resize-none focus:outline-none focus:border-[#ff6600]"></textarea>
+                    <label class="text-[10px] uppercase font-bold text-gray-400">Tu opinión sobre el video:</label>
+                    <textarea id="opinionEdicionInput" rows="3" placeholder="Escribe tu opinión de la edición aquí..." class="w-full bg-[#0d1117] border border-gray-700 rounded-lg p-2.5 text-xs text-white resize-none focus:outline-none focus:border-[#ff6600]"></textarea>
                 </div>
             </div>
 
-            <button onclick="enviarWebhookEdicion()" id="btnSubmitEdicion" class="w-full bg-[#ff6600] text-black font-bold text-xs py-3 rounded-xl tracking-wider">
-                <i class="fa-solid fa-paper-plane mr-1"></i> ENVIAR CALIFICACIÓN EDICIÓN
+            <button onclick="enviarWebhookEdicion()" id="btnSubmitEdicion" class="w-full bg-[#ff6600] text-black font-bold text-xs py-3 rounded-xl tracking-wider uppercase">
+                <i class="fa-solid fa-paper-plane mr-1"></i> Enviar y Continuar
             </button>
         </div>
 
-        <!-- PÁGINA 3: PROPUESTA HARDWARE Y ARGUMENTOS (WEBHOOK 2) -->
-        <div id="page-3" class="page justify-between gap-3">
+        <!-- PÁGINA 4: POR QUÉ NO USAS EL QUE YA TIENES (WEBHOOK 2) -->
+        <div id="page-4" class="page justify-between gap-3">
             <div class="text-center">
-                <h2 class="text-base font-bold text-amber-500 tracking-wider">PASO 2: PROPUESTA DE INVERSIÓN</h2>
-                <p class="text-[10px] text-gray-400 mt-1">ARGUMENTACIÓN Y RETROALIMENTACIÓN</p>
+                <h2 class="text-xs font-bold text-amber-500 tracking-widest uppercase mb-1">PÁGINA 4: PROPUESTA</h2>
+                <div class="w-full h-[2px] bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
             </div>
 
-            <!-- Caja con los argumentos exactos -->
-            <div class="cyber-card p-4 space-y-3 bg-black/30">
+            <div class="cyber-card p-4 space-y-3 bg-black/30 overflow-y-auto max-h-[380px]">
                 <h3 class="text-xs font-bold text-[#ff6600] uppercase tracking-wider text-center border-b border-gray-800 pb-2">
-                    ¿Por qué no usas la que ya tienes o por qué prefieres esto?
+                    ¿Por qué no usas la que ya tienes o por qué prefieres esto? Aquí les explico mis razones:
                 </h3>
                 
                 <div class="text-xs space-y-3 text-gray-300">
@@ -167,19 +173,18 @@
                 </div>
             </div>
 
-            <!-- Formulario de Opinión de la Propuesta -->
-            <div class="cyber-card p-3.5 flex flex-col gap-2">
-                <label class="text-[11px] text-gray-400 font-bold leading-tight">
-                    Si tienen alguna última opinión, duda o consejo, pueden escribírmelo aquí mismo:
+            <div class="cyber-card p-3 flex flex-col gap-2">
+                <label class="text-[11px] text-gray-400 font-bold">
+                    Si tienen alguna última opinión, duda o consejo, pueden escribírmelo aquí mismo.
                 </label>
-                <textarea id="opinionPropuestaInput" rows="3" placeholder="Escribe aquí tu consejo, duda o dictamen final..." class="w-full bg-[#0d1117] border border-gray-700 rounded-lg p-2.5 text-xs text-white resize-none focus:outline-none focus:border-amber-500"></textarea>
+                <textarea id="opinionPropuestaInput" rows="2" placeholder="Escribe tus dudas, consejos u opinión final..." class="w-full bg-[#0d1117] border border-gray-700 rounded-lg p-2.5 text-xs text-white resize-none focus:outline-none focus:border-amber-500"></textarea>
             </div>
 
             <div class="space-y-2">
                 <button onclick="enviarWebhookPropuesta()" id="btnSubmitPropuesta" class="w-full bg-amber-500 text-black font-bold text-xs py-3 rounded-xl tracking-wider uppercase">
                     <i class="fa-solid fa-check-double mr-1"></i> Enviar Opinión Final
                 </button>
-                <p class="text-[10px] text-center text-gray-500 font-bold tracking-wide italic">
+                <p class="text-[9px] text-center text-gray-500 font-bold tracking-wide italic">
                     Y recuerden: todo esto será posible solo si logro sacar buenas calificaciones en la escuela 🔥
                 </p>
             </div>
@@ -191,64 +196,54 @@
         let tíaSeleccionada = "";
         let estrellasMarcadas = 0;
 
-        // URLs de tus webhooks originales integradas limpiamente
         const webhookUrlEdicion = "https://discord.com/api/webhooks/1491367258470219796/PApu8j67Mnz9GN8JK6vqPCiNlaZvoqnEG9GBEjSBEOXAawRGc_UY-EMXVNnenDxzUjlr";
         const webhookUrlPropuesta = "https://discord.com/api/webhooks/1491657056686571540/CRJs0yxAdBGDf9xu-ViXGb-o9kz92f6JhZcl37n-K8yq6EbCKlm2dwuNZ39TL_3eIMMp";
 
-        // Cambiar entre las páginas simuladas en el dispositivo móvil
         function cambiarPagina(numeroPagina) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(`page-${numeroPagina}`).classList.add('active');
         }
 
-        // Carga dinámicamente el mensaje original en la Página 1 según la tía seleccionada
         function iniciarSistema(nombreTia) {
             tíaSeleccionada = nombreTia;
-            document.getElementById('panelTitle').innerText = `PANEL CENTRAL: TÍA ${nombreTia.toUpperCase()}`;
-            
             const msgContainer = document.getElementById('mensajeOriginalContainer');
             
             if (nombreTia === "Luisa") {
                 msgContainer.innerHTML = `
-                    <p class="font-bold text-[#ff6600] text-sm mb-1">Hola tía Luisa,</p>
+                    <p class="font-bold text-[#ff6600] text-base mb-1">Hola tía Luisa,</p>
                     <p>Como sabes, hace poco te envié mi propuesta para adquirir una computadora. He estado analizando bien la situación y llegué a una conclusión, pero además, como me gusta mucho editar, preparé un video para explicarte todo mejor. Aquí te lo dejo 😵‍💫</p>
                 `;
             } else if (nombreTia === "Pau" || nombreTia === "Andrea") {
                 msgContainer.innerHTML = `
-                    <p class="font-bold text-[#ff6600] text-sm mb-1">Hola tía ${nombreTia},</p>
+                    <p class="font-bold text-[#ff6600] text-base mb-1">Hola tías,</p>
                     <p>Les pongo en contexto: hace poco le envié a la tía Luisa mi propuesta y el plan para comprar una computadora que necesito para la prepa, y ahora también necesito mucho de su ayuda y apoyo para lograrlo.</p>
-                    <p class="mt-1">He estado pensando y analizando todo, y llegué a una conclusión, pero se las explico mejor en este video que preparé —¡ya saben que me encanta editar! Es el mismo video que le envié a Luisa, y funciona con el mismo sistema de calificación de estrellas y comentarios.</p>
+                    <p class="mt-2">He estado pensando y analizando todo, y llegué a una conclusión, pero se las explico mejor en este video que preparé —¡ya saben que me encanta editar! Es el mismo video que le envié a Luisa, y funciona con el mismo sistema de calificación de estrellas y comentarios.</p>
                 `;
             }
             cambiarPagina(1);
         }
 
-        // Lógica visual interactiva para el componente de estrellas
         function marcarEstrellas(calificacion) {
             estrellasMarcadas = calificacion;
             document.getElementById('starRatingInput').value = calificacion;
             const estrellas = document.querySelectorAll('.star-btn');
             estrellas.forEach(estrella => {
                 const valorEstrella = parseInt(estrella.getAttribute('data-value'));
-                if (valorEstrella <= calificacion) {
-                    estrella.className = "fa-star fa-solid star-btn text-amber-400 drop-shadow-[0_0_5px_rgba(245,158,11,0.5)]";
-                } else {
-                    estrella.className = "fa-star fa-regular star-btn text-gray-600";
-                }
+                estrella.className = (valorEstrella <= calificacion) ? 
+                    "fa-star fa-solid star-btn text-amber-400 drop-shadow-[0_0_5px_rgba(245,158,11,0.5)]" : 
+                    "fa-star fa-regular star-btn text-gray-600";
             });
         }
 
-        // Ejecuta el envío de datos de la página 2 hacia el WEBHOOK 1 (Edición del Video)
         async function enviarWebhookEdicion() {
             const calificacionEstrellas = document.getElementById('starRatingInput').value;
             const opinionTextoEdicion = document.getElementById('opinionEdicionInput').value;
 
             if (calificacionEstrellas === "0" || opinionTextoEdicion.trim() === "") {
-                alert("Por favor selecciona una calificación en estrellas y escribe tu opinión del video.");
+                alert("Por favor califica con estrellas y deja tu opinión del video.");
                 return;
             }
 
-            // Estructura exacta solicitada en tu prompt para la llegada de información
             const payloadDiscord = {
                 username: "Sistema de Calificación de Edición",
                 content: `**NUEVA EVALUACIÓN DE VIDEO**\n\nTía: Tía ${tíaSeleccionada}\nEstrellas: ${"⭐".repeat(calificacionEstrellas)} (${calificacionEstrellas}/5)\nOpinión: ${opinionTextoEdicion}`
@@ -256,7 +251,6 @@
 
             const boton = document.getElementById('btnSubmitEdicion');
             boton.disabled = true;
-            boton.innerText = "ENVIANDO DATOS AL SERVIDOR...";
 
             try {
                 const res = await fetch(webhookUrlEdicion, {
@@ -266,37 +260,33 @@
                 });
 
                 if (res.ok) {
-                    alert("¡Paso 1 completado con éxito! Tu opinión sobre el video ha sido transmitida. Procedamos al Paso 2.");
-                    cambiarPagina(3); // Avanza limpiamente a la última página de la propuesta
+                    alert("¡Paso 1 completado con éxito! Pasemos al Paso 2.");
+                    cambiarPagina(4); // Salta directo a la Página 4 de la propuesta
                 } else {
-                    alert("Error en el canal de comunicación. Vuelve a intentarlo.");
+                    alert("Error en la conexión.");
                     boton.disabled = false;
-                    boton.innerText = "ENVIAR CALIFICACIÓN EDICIÓN";
                 }
             } catch (err) {
-                alert("Error crítico del sistema de red.");
+                alert("Error de red.");
                 boton.disabled = false;
-                boton.innerText = "ENVIAR CALIFICACIÓN EDICIÓN";
             }
         }
 
-        // Ejecuta el envío de datos de la página 3 hacia el WEBHOOK 2 (Opinión de la Propuesta)
         async function enviarWebhookPropuesta() {
             const opinionTextoPropuesta = document.getElementById('opinionPropuestaInput').value;
 
             if (opinionTextoPropuesta.trim() === "") {
-                alert("Por favor escribe tu opinión, duda o consejo antes de finalizar.");
+                alert("Por favor escribe tu opinión o consejo antes de finalizar.");
                 return;
             }
 
             const payloadDiscord = {
                 username: "Sistema de Validación de Propuestas",
-                content: `**NUEVO INFORME DE PROPUESTA RECIBIDO**\n\n**Remitente:** Tía ${tíaSeleccionada}\n**Dudas, Consejos u Opinión Final:** ${opinionTextoPropuesta}\n\n_Estatus Académico: Condicionado a excelentes notas escolares_ 🔥`
+                content: `**NUEVO INFORME DE PROPUESTA RECIBIDO**\n\n**Remitente:** Tía ${tíaSeleccionada}\n**Dudas, Consejos u Opinión Final:** ${opinionTextoPropuesta}`
             };
 
             const boton = document.getElementById('btnSubmitPropuesta');
             boton.disabled = true;
-            boton.innerText = "PROCESANDO DICTAMEN FINAL...";
 
             try {
                 const res = await fetch(webhookUrlPropuesta, {
@@ -306,18 +296,16 @@
                 });
 
                 if (res.ok) {
-                    alert(`¡Muchas gracias Tía ${tíaSeleccionada}! La evaluación completa de la propuesta y del video ha sido enviada con éxito.`);
+                    alert(`¡Muchas gracias Tía ${tíaSeleccionada}! La evaluación completa ha sido guardada en la base de datos.`);
                     document.getElementById('opinionPropuestaInput').value = "";
-                    boton.innerText = "✓ SISTEMA COMPLETADO CON ÉXITO";
+                    boton.innerText = "✓ PROCESO COMPLETADO";
                 } else {
-                    alert("Error al guardar la opinión final.");
+                    alert("Error al enviar la opinión final.");
                     boton.disabled = false;
-                    boton.innerText = "ENVIAR OPINIÓN FINAL";
                 }
             } catch (err) {
-                alert("Error de conexión.");
+                alert("Error de red.");
                 boton.disabled = false;
-                boton.innerText = "ENVIAR OPINIÓN FINAL";
             }
         }
     </script>
