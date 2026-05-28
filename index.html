@@ -4,310 +4,518 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SISTEMA DE INVERSIÓN TECNOLÓGICA V1.0</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;700&display=swap');
+        :root {
+            --orange: #ff6600;
+            --orange-dim: rgba(255,102,0,0.15);
+            --orange-glow: 0 0 18px rgba(255,102,0,0.5);
+            --amber: #f59e0b;
+            --bg: #010204;
+            --surface: #0d1117;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Chakra Petch', sans-serif;
-            background: #010204;
+            background: var(--bg);
             color: #e0e6ed;
-            margin: 0;
-            height: 100vh;
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden; perspective: 1200px;
+            height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
+        /* ── STARS BG ── */
         #bg-stars {
-            position: absolute; width: 100%; height: 100%;
+            position: fixed; inset: 0;
             background: url('https://i.postimg.cc/T34S4S6G/stars.png') repeat;
-            opacity: 0.25; animation: moveStars 120s linear infinite; z-index: -1;
+            opacity: 0.2;
+            animation: moveStars 120s linear infinite;
+            z-index: 0;
         }
-        @keyframes moveStars { from { background-position: 0 0; } to { background-position: 2000px 2000px; } }
+        @keyframes moveStars { to { background-position: 2000px 2000px; } }
 
+        /* ── DEVICE SHELL ── */
         #device {
-            width: 390px; height: 820px;
-            background: #05070a; border: 20px solid #1a1a1a; border-radius: 65px;
-            box-shadow: 0 0 100px rgba(255, 102, 0, 0.3), inset 0 0 30px rgba(255, 102, 0, 0.15);
-            overflow: hidden; position: relative;
+            width: min(390px, 100vw);
+            height: min(820px, 100dvh);
+            background: #05070a;
+            border: clamp(0px, 2vw, 18px) solid #1a1a1a;
+            border-radius: clamp(0px, 5vw, 60px);
+            box-shadow: 0 0 80px rgba(255,102,0,0.25), inset 0 0 25px rgba(255,102,0,0.08);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
         }
 
-        .page { display: none; flex-direction: column; height: 100%; padding: 40px 24px; background: radial-gradient(circle at center, #0d1117 0%, #010204 100%); overflow-y: auto; }
-        .active { display: flex; animation: pageSlideIn 0.4s ease-out; }
-        @keyframes pageSlideIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        /* ── PAGES ── */
+        .page {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+            padding: 28px 20px 24px;
+            background: radial-gradient(ellipse at 50% 0%, #111820 0%, #010204 70%);
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: none;
+        }
+        .page::-webkit-scrollbar { display: none; }
+        .page.active {
+            display: flex;
+            animation: slideUp 0.4s cubic-bezier(.22,.68,0,1.2) both;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
 
-        .neon-orange { text-shadow: 0 0 10px #ff6600, 0 0 20px #ff6600; }
-        
+        /* ── COMMON COMPONENTS ── */
+        .section-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: var(--orange);
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--orange), transparent);
+            margin-bottom: 16px;
+            opacity: .6;
+        }
         .cyber-card {
-            background: rgba(255, 102, 0, 0.02); 
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 102, 0, 0.15); 
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            background: rgba(255,102,0,0.03);
+            border: 1px solid rgba(255,102,0,0.18);
+            border-radius: 18px;
+            backdrop-filter: blur(6px);
+        }
+        .btn-primary {
+            width: 100%;
+            background: var(--orange);
+            color: #000;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--orange-glow);
+            transition: transform .15s, box-shadow .15s;
+            flex-shrink: 0;
+        }
+        .btn-primary:hover   { transform: translateY(-1px); box-shadow: 0 0 28px rgba(255,102,0,.7); }
+        .btn-primary:active  { transform: translateY(0); }
+        .btn-primary:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+        .btn-amber {
+            background: var(--amber);
+            box-shadow: 0 0 18px rgba(245,158,11,.4);
+        }
+        .neon { text-shadow: 0 0 12px var(--orange), 0 0 24px var(--orange); }
+
+        /* ── PAGE 0: BOOT LOADER ── */
+        #page-0 {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 0;
+            padding: 40px 28px;
+        }
+        .boot-logo {
+            font-size: 38px;
+            color: var(--orange);
+            margin-bottom: 14px;
+            animation: pulseIcon 2s ease-in-out infinite;
+        }
+        @keyframes pulseIcon {
+            0%,100% { text-shadow: 0 0 12px var(--orange), 0 0 30px var(--orange); }
+            50%      { text-shadow: 0 0 4px var(--orange); }
+        }
+        .boot-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .boot-sub {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: #555;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
         }
 
-        .short-container {
-            position: relative; width: 100%; padding-bottom: 135%; height: 0; overflow: hidden; border-radius: 16px;
-            border: 1px solid rgba(255, 102, 0, 0.25);
+        /* progress bar */
+        .progress-wrap {
+            width: 100%;
+            height: 3px;
+            background: #1a1a2e;
+            border-radius: 99px;
+            overflow: hidden;
+            margin-bottom: 10px;
         }
-        .short-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .star-btn { cursor: pointer; transition: transform 0.1s; }
-        .star-btn:hover { transform: scale(1.2); }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff6600, #ffaa00);
+            border-radius: 99px;
+            transition: width .05s linear;
+        }
+        .progress-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px;
+            color: var(--orange);
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+        }
+
+        /* ── PAGE 0B: ACCESS ── */
+        #page-0b {
+            justify-content: center;
+            gap: 0;
+            padding: 40px 28px;
+        }
+        .access-icon {
+            font-size: 30px; color: var(--orange);
+            text-align: center; margin-bottom: 16px;
+        }
+        .access-title {
+            font-size: 20px; font-weight: 700; color: #fff;
+            letter-spacing: 2px; text-align: center;
+            margin-bottom: 6px;
+        }
+        .access-sub {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px; color: #555; letter-spacing: 2px;
+            text-align: center; text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+        select.styled {
+            width: 100%;
+            background: var(--surface);
+            border: 1.5px solid rgba(255,102,0,.35);
+            border-radius: 14px;
+            padding: 14px 16px;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 13px; color: #fff;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%23ff6600'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            cursor: pointer;
+        }
+        select.styled:focus { outline: none; border-color: var(--orange); box-shadow: var(--orange-glow); }
+        select.styled option { background: #0d1117; }
+
+        /* ── PAGE 1: MENSAJE ── */
+        #page-1 { gap: 12px; }
+        .msg-bubble {
+            background: rgba(255,102,0,0.05);
+            border: 1px solid rgba(255,102,0,0.2);
+            border-radius: 18px;
+            padding: 20px;
+            line-height: 1.7;
+            font-size: 13px;
+            color: #d0d8e4;
+            flex: 1;
+        }
+        .msg-bubble .greeting {
+            font-size: 16px; font-weight: 700;
+            color: var(--orange); margin-bottom: 12px;
+            display: block;
+        }
+
+        /* ── PAGE 2: VIDEO ── */
+        #page-2 { gap: 14px; }
+        .video-wrap {
+            position: relative; width: 100%;
+            padding-bottom: 133%; height: 0; overflow: hidden;
+            border-radius: 18px;
+            border: 1px solid rgba(255,102,0,0.25);
+            flex-shrink: 0;
+        }
+        .video-wrap iframe {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%; border: none;
+        }
+
+        /* ── PAGE 3: ESTRELLAS ── */
+        #page-3 { gap: 14px; }
+        .star-row {
+            display: flex; justify-content: center; gap: 14px;
+            padding: 8px 0;
+        }
+        .star-btn {
+            font-size: 28px; cursor: pointer;
+            transition: transform .12s, color .12s;
+            color: #333;
+        }
+        .star-btn:hover { transform: scale(1.25); }
+        .star-btn.lit {
+            color: var(--amber);
+            filter: drop-shadow(0 0 6px rgba(245,158,11,.6));
+        }
+        textarea.styled {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid #2a2a3a;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 12px; color: #fff;
+            resize: none;
+            transition: border-color .2s;
+        }
+        textarea.styled:focus { outline: none; border-color: var(--orange); }
+        textarea.styled::placeholder { color: #444; }
+        label.field-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 9px; letter-spacing: 2px;
+            color: #666; text-transform: uppercase;
+            margin-bottom: 4px; display: block;
+        }
+
+        /* ── PAGE 4: PROPUESTA ── */
+        #page-4 { gap: 12px; }
+        .reason-card {
+            background: rgba(255,102,0,0.04);
+            border: 1px solid rgba(255,102,0,0.15);
+            border-radius: 14px;
+            padding: 14px 16px;
+        }
+        .reason-card .reason-title {
+            font-size: 11px; font-weight: 700;
+            color: #fff; letter-spacing: .5px;
+            margin-bottom: 4px;
+        }
+        .reason-card .reason-body {
+            font-size: 11px; color: #9aa5b4;
+            line-height: 1.6;
+        }
+
+        /* ── PAGE 5: GRACIAS ── */
+        #page-5 {
+            justify-content: center; align-items: center;
+            text-align: center; gap: 0;
+            padding: 40px 28px;
+        }
+        .thanks-icon {
+            font-size: 52px; margin-bottom: 18px;
+            animation: popIn .5s cubic-bezier(.34,1.56,.64,1) both;
+        }
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+        .thanks-title {
+            font-size: 22px; font-weight: 700;
+            color: var(--orange); letter-spacing: 2px;
+            text-shadow: 0 0 14px var(--orange);
+            margin-bottom: 10px;
+        }
+        .thanks-body {
+            font-size: 12px; color: #9aa5b4;
+            line-height: 1.8; max-width: 280px;
+        }
+        .confetti-line {
+            font-size: 22px; margin: 16px 0;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(-6px); }
+        }
+
+        /* ── TOAST ── */
+        #toast {
+            position: fixed; bottom: 32px; left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: #1a2a1a;
+            border: 1px solid #2a5a2a;
+            color: #6aff6a;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px; letter-spacing: 1px;
+            padding: 12px 22px; border-radius: 99px;
+            white-space: nowrap;
+            transition: transform .35s cubic-bezier(.22,.68,0,1.2), opacity .35s;
+            opacity: 0; z-index: 999;
+        }
+        #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     </style>
 </head>
 <body>
 
-    <div id="bg-stars"></div>
+<div id="bg-stars"></div>
 
-    <div id="device">
+<div id="device">
 
-        <!-- ACCESO OBLIGATORIO -->
-        <div id="page-0" class="page active justify-center text-center">
-            <h1 class="text-2xl font-bold tracking-wider text-[#ff6600] neon-orange mb-2">CONTROL DE ACCESO</h1>
-            <p class="text-xs text-gray-400 mb-6 uppercase tracking-widest">Identifícate para iniciar</p>
-            <select id="tiaSelector" onchange="iniciarSistema(this.value)" class="w-full bg-[#0d1117] border-2 border-[#ff6600]/40 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#ff6600]">
-                <option value="" disabled selected>-- Selecciona tu nombre --</option>
-                <option value="Luisa">Tía Luisa</option>
-                <option value="Pau">Tía Pau</option>
-                <option value="Andrea">Tía Andrea</option>
-            </select>
+    <!-- ══════════════════════════════════════════
+         PAGE 0: BOOT / LOADING
+    ═══════════════════════════════════════════ -->
+    <div id="page-0" class="page active">
+        <div class="boot-logo"><i class="fa-solid fa-microchip"></i></div>
+        <div class="boot-title">SISTEMA V1.0</div>
+        <div class="boot-sub">INVERSIÓN TECNOLÓGICA</div>
+
+        <div class="progress-wrap">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
-
-        <!-- PÁGINA 1: EL TEXTO -->
-        <div id="page-1" class="page justify-between gap-4">
-            <div class="text-center">
-                <h2 class="text-xs font-bold text-[#ff6600] tracking-widest uppercase mb-1">PÁGINA 1: CONTEXTO</h2>
-                <div class="w-full h-[2px] bg-gradient-to-r from-transparent via-[#ff6600] to-transparent"></div>
-            </div>
-
-            <div class="cyber-card p-5 text-sm text-gray-200 leading-relaxed space-y-3 bg-black/40 my-auto" id="mensajeOriginalContainer">
-                <!-- Se inyecta dinámicamente -->
-            </div>
-
-            <button onclick="cambiarPagina(2)" class="w-full bg-[#ff6600] text-black font-bold text-xs py-3 rounded-xl tracking-wider uppercase shadow-[0_0_15px_rgba(255,102,0,0.3)]">
-                Ir a Página 2: Ver Video <i class="fa-solid fa-arrow-right ml-1"></i>
-            </button>
-        </div>
-
-        <!-- PÁGINA 2: EL VÍDEO -->
-        <div id="page-2" class="page justify-between gap-3">
-            <div class="text-center">
-                <h2 class="text-xs font-bold text-[#ff6600] tracking-widest uppercase mb-1">PÁGINA 2: PRESENTACIÓN</h2>
-                <div class="w-full h-[2px] bg-gradient-to-r from-transparent via-[#ff6600] to-transparent"></div>
-            </div>
-
-            <div class="short-container my-auto">
-                <iframe src="https://www.youtube.com/embed/QWNoqk6-fIw?rel=0&modestbranding=1" title="Video Presentación" frameborder="0" allowfullscreen></iframe>
-            </div>
-
-            <button onclick="cambiarPagina(3)" class="w-full bg-[#ff6600] text-black font-bold text-xs py-3 rounded-xl tracking-wider uppercase">
-                Ir a Página 3: Calificar <i class="fa-solid fa-arrow-right ml-1"></i>
-            </button>
-        </div>
-
-        <!-- PÁGINA 3: LA CALIFICACIÓN (WEBHOOK 1) -->
-        <div id="page-3" class="page justify-between gap-4">
-            <div class="text-center">
-                <h2 class="text-xs font-bold text-[#ff6600] tracking-widest uppercase mb-1">PÁGINA 3: CALIFICACIÓN</h2>
-                <div class="w-full h-[2px] bg-gradient-to-r from-transparent via-[#ff6600] to-transparent"></div>
-            </div>
-
-            <div class="cyber-card p-4 space-y-4 my-auto flex flex-col justify-center">
-                <p class="text-xs text-gray-300 text-center leading-relaxed">
-                    Al finalizar el video, verás una sección donde puedes calificarlo de 1 a 5 estrellas y escribir tu opinión. Todo lo que escribas llegará directamente a mí a través de este enlace:
-                </p>
-                <p class="text-[11px] text-amber-500 bg-amber-500/5 p-2.5 rounded-lg border border-amber-500/20 text-center font-bold">
-                    Nota: En el espacio para escribir, por favor pon solo tu opinión sobre el video; más adelante podrás opinar también sobre la propuesta de lo que quiero.
-                </p>
-
-                <!-- Estrellas -->
-                <div class="text-center pt-2">
-                    <div class="flex justify-center gap-3 text-2xl mb-2">
-                        <i class="fa-star fa-regular star-btn text-gray-600" data-value="1" onclick="marcarEstrellas(1)"></i>
-                        <i class="fa-star fa-regular star-btn text-gray-600" data-value="2" onclick="marcarEstrellas(2)"></i>
-                        <i class="fa-star fa-regular star-btn text-gray-600" data-value="3" onclick="marcarEstrellas(3)"></i>
-                        <i class="fa-star fa-regular star-btn text-gray-600" data-value="4" onclick="marcarEstrellas(4)"></i>
-                        <i class="fa-star fa-regular star-btn text-gray-600" data-value="5" onclick="marcarEstrellas(5)"></i>
-                    </div>
-                    <input type="hidden" id="starRatingInput" value="0">
-                </div>
-
-                <div class="flex flex-col gap-1">
-                    <label class="text-[10px] uppercase font-bold text-gray-400">Tu opinión sobre el video:</label>
-                    <textarea id="opinionEdicionInput" rows="3" placeholder="Escribe tu opinión de la edición aquí..." class="w-full bg-[#0d1117] border border-gray-700 rounded-lg p-2.5 text-xs text-white resize-none focus:outline-none focus:border-[#ff6600]"></textarea>
-                </div>
-            </div>
-
-            <button onclick="enviarWebhookEdicion()" id="btnSubmitEdicion" class="w-full bg-[#ff6600] text-black font-bold text-xs py-3 rounded-xl tracking-wider uppercase">
-                <i class="fa-solid fa-paper-plane mr-1"></i> Enviar y Continuar
-            </button>
-        </div>
-
-        <!-- PÁGINA 4: POR QUÉ NO USAS EL QUE YA TIENES (WEBHOOK 2) -->
-        <div id="page-4" class="page justify-between gap-3">
-            <div class="text-center">
-                <h2 class="text-xs font-bold text-amber-500 tracking-widest uppercase mb-1">PÁGINA 4: PROPUESTA</h2>
-                <div class="w-full h-[2px] bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
-            </div>
-
-            <div class="cyber-card p-4 space-y-3 bg-black/30 overflow-y-auto max-h-[380px]">
-                <h3 class="text-xs font-bold text-[#ff6600] uppercase tracking-wider text-center border-b border-gray-800 pb-2">
-                    ¿Por qué no usas la que ya tienes o por qué prefieres esto? Aquí les explico mis razones:
-                </h3>
-                
-                <div class="text-xs space-y-3 text-gray-300">
-                    <p class="leading-relaxed">
-                        <strong class="text-white block mb-0.5">1. Es un equipo de muy buena calidad:</strong> 
-                        Me puede durar perfectamente unos 6 años, así es una inversión a largo plazo.
-                    </p>
-                    <p class="leading-relaxed">
-                        <strong class="text-white block mb-0.5">2. Cuenta con 1 año de garantía:</strong> 
-                        Por si pasa cualquier imprevisto, estoy protegido.
-                    </p>
-                    <p class="leading-relaxed">
-                        <strong class="text-white block mb-0.5">3. Le haré modificación de usuario root:</strong> 
-                        En palabras sencillas, tendré control total del sistema. Esto me permitirá modificarlo al 100%, probar cosas nuevas, aprender mucho más sobre tecnología y sacarle el máximo provecho para mis estudios y proyectos.
-                    </p>
-                </div>
-            </div>
-
-            <div class="cyber-card p-3 flex flex-col gap-2">
-                <label class="text-[11px] text-gray-400 font-bold">
-                    Si tienen alguna última opinión, duda o consejo, pueden escribírmelo aquí mismo.
-                </label>
-                <textarea id="opinionPropuestaInput" rows="2" placeholder="Escribe tus dudas, consejos u opinión final..." class="w-full bg-[#0d1117] border border-gray-700 rounded-lg p-2.5 text-xs text-white resize-none focus:outline-none focus:border-amber-500"></textarea>
-            </div>
-
-            <div class="space-y-2">
-                <button onclick="enviarWebhookPropuesta()" id="btnSubmitPropuesta" class="w-full bg-amber-500 text-black font-bold text-xs py-3 rounded-xl tracking-wider uppercase">
-                    <i class="fa-solid fa-check-double mr-1"></i> Enviar Opinión Final
-                </button>
-                <p class="text-[9px] text-center text-gray-500 font-bold tracking-wide italic">
-                    Y recuerden: todo esto será posible solo si logro sacar buenas calificaciones en la escuela 🔥
-                </p>
-            </div>
-        </div>
-
+        <div class="progress-label" id="progressLabel">CARGANDO ACTUALIZACIÓN...</div>
     </div>
 
-    <script>
-        let tíaSeleccionada = "";
-        let estrellasMarcadas = 0;
+    <!-- ══════════════════════════════════════════
+         PAGE 0B: ACCESS / SELECT NAME
+    ═══════════════════════════════════════════ -->
+    <div id="page-0b" class="page">
+        <div class="access-icon"><i class="fa-solid fa-user-shield"></i></div>
+        <div class="access-title">BIENVENIDA</div>
+        <div class="access-sub">Control de acceso · Identifícate</div>
+        <select id="tiaSelector" class="styled" onchange="iniciarSistema(this.value)">
+            <option value="" disabled selected>— Selecciona tu nombre —</option>
+            <option value="Luisa">Tía Luisa</option>
+            <option value="Pau">Tía Pau</option>
+            <option value="Andrea">Tía Andrea</option>
+        </select>
+    </div>
 
-        const webhookUrlEdicion = "https://discord.com/api/webhooks/1491367258470219796/PApu8j67Mnz9GN8JK6vqPCiNlaZvoqnEG9GBEjSBEOXAawRGc_UY-EMXVNnenDxzUjlr";
-        const webhookUrlPropuesta = "https://discord.com/api/webhooks/1491657056686571540/CRJs0yxAdBGDf9xu-ViXGb-o9kz92f6JhZcl37n-K8yq6EbCKlm2dwuNZ39TL_3eIMMp";
+    <!-- ══════════════════════════════════════════
+         PAGE 1: MENSAJE PERSONALIZADO
+    ═══════════════════════════════════════════ -->
+    <div id="page-1" class="page">
+        <div class="section-label">Contexto</div>
+        <div class="divider"></div>
+        <div class="msg-bubble" id="mensajeOriginalContainer"><!-- dynamic --></div>
+        <button class="btn-primary" onclick="cambiarPagina('2')">
+            Ver presentación <i class="fa-solid fa-arrow-right ml-1"></i>
+        </button>
+    </div>
 
-        function cambiarPagina(numeroPagina) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(`page-${numeroPagina}`).classList.add('active');
-        }
+    <!-- ══════════════════════════════════════════
+         PAGE 2: VIDEO
+    ═══════════════════════════════════════════ -->
+    <div id="page-2" class="page">
+        <div class="section-label">Presentación</div>
+        <div class="divider"></div>
+        <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/QWNoqk6-fIw?rel=0&modestbranding=1"
+                    title="Video Presentación" allowfullscreen></iframe>
+        </div>
+        <button class="btn-primary" onclick="cambiarPagina('3')">
+            Calificar el video <i class="fa-solid fa-star ml-1"></i>
+        </button>
+    </div>
 
-        function iniciarSistema(nombreTia) {
-            tíaSeleccionada = nombreTia;
-            const msgContainer = document.getElementById('mensajeOriginalContainer');
-            
-            if (nombreTia === "Luisa") {
-                msgContainer.innerHTML = `
-                    <p class="font-bold text-[#ff6600] text-base mb-1">Hola tía Luisa,</p>
-                    <p>Como sabes, hace poco te envié mi propuesta para adquirir una computadora. He estado analizando bien la situación y llegué a una conclusión, pero además, como me gusta mucho editar, preparé un video para explicarte todo mejor. Aquí te lo dejo 😵‍💫</p>
-                `;
-            } else if (nombreTia === "Pau" || nombreTia === "Andrea") {
-                msgContainer.innerHTML = `
-                    <p class="font-bold text-[#ff6600] text-base mb-1">Hola tías,</p>
-                    <p>Les pongo en contexto: hace poco le envié a la tía Luisa mi propuesta y el plan para comprar una computadora que necesito para la prepa, y ahora también necesito mucho de su ayuda y apoyo para lograrlo.</p>
-                    <p class="mt-2">He estado pensando y analizando todo, y llegué a una conclusión, pero se las explico mejor en este video que preparé —¡ya saben que me encanta editar! Es el mismo video que le envié a Luisa, y funciona con el mismo sistema de calificación de estrellas y comentarios.</p>
-                `;
-            }
-            cambiarPagina(1);
-        }
+    <!-- ══════════════════════════════════════════
+         PAGE 3: CALIFICACIÓN (Webhook 1)
+    ═══════════════════════════════════════════ -->
+    <div id="page-3" class="page">
+        <div class="section-label">Calificación del video</div>
+        <div class="divider"></div>
 
-        function marcarEstrellas(calificacion) {
-            estrellasMarcadas = calificacion;
-            document.getElementById('starRatingInput').value = calificacion;
-            const estrellas = document.querySelectorAll('.star-btn');
-            estrellas.forEach(estrella => {
-                const valorEstrella = parseInt(estrella.getAttribute('data-value'));
-                estrella.className = (valorEstrella <= calificacion) ? 
-                    "fa-star fa-solid star-btn text-amber-400 drop-shadow-[0_0_5px_rgba(245,158,11,0.5)]" : 
-                    "fa-star fa-regular star-btn text-gray-600";
-            });
-        }
+        <!-- stars -->
+        <div class="cyber-card" style="padding:20px 16px; margin-bottom:12px;">
+            <p style="font-size:12px; color:#9aa5b4; text-align:center; line-height:1.7; margin-bottom:16px;">
+                ¿Cómo te pareció el video? Deja tu calificación de 1 a 5 estrellas y tu opinión sobre la edición. 🎬
+            </p>
+            <div class="star-row">
+                <i class="fa-regular fa-star star-btn" data-v="1" onclick="marcarEstrellas(1)"></i>
+                <i class="fa-regular fa-star star-btn" data-v="2" onclick="marcarEstrellas(2)"></i>
+                <i class="fa-regular fa-star star-btn" data-v="3" onclick="marcarEstrellas(3)"></i>
+                <i class="fa-regular fa-star star-btn" data-v="4" onclick="marcarEstrellas(4)"></i>
+                <i class="fa-regular fa-star star-btn" data-v="5" onclick="marcarEstrellas(5)"></i>
+            </div>
+            <p id="starLabel" style="text-align:center; font-size:10px; color:#444; margin-top:8px; font-family:'Share Tech Mono',monospace; letter-spacing:2px;">SIN CALIFICAR</p>
+        </div>
 
-        async function enviarWebhookEdicion() {
-            const calificacionEstrellas = document.getElementById('starRatingInput').value;
-            const opinionTextoEdicion = document.getElementById('opinionEdicionInput').value;
+        <div style="margin-bottom:12px;">
+            <label class="field-label">Tu opinión sobre la edición:</label>
+            <textarea id="opinionEdicionInput" class="styled" rows="4"
+                      placeholder="Escribe aquí lo que piensas sobre el video..."></textarea>
+        </div>
 
-            if (calificacionEstrellas === "0" || opinionTextoEdicion.trim() === "") {
-                alert("Por favor califica con estrellas y deja tu opinión del video.");
-                return;
-            }
+        <div style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.2); border-radius:12px; padding:12px 14px; margin-bottom:14px;">
+            <p style="font-size:10px; color:#c9a230; line-height:1.6;">
+                <i class="fa-solid fa-circle-info" style="margin-right:5px;"></i>
+                En el campo de texto ponlo solo tu opinión del video; en la siguiente pantalla podrás compartir tu opinión sobre la propuesta.
+            </p>
+        </div>
 
-            const payloadDiscord = {
-                username: "Sistema de Calificación de Edición",
-                content: `**NUEVA EVALUACIÓN DE VIDEO**\n\nTía: Tía ${tíaSeleccionada}\nEstrellas: ${"⭐".repeat(calificacionEstrellas)} (${calificacionEstrellas}/5)\nOpinión: ${opinionTextoEdicion}`
-            };
+        <button class="btn-primary" onclick="enviarWebhookEdicion()" id="btnSubmitEdicion">
+            <i class="fa-solid fa-paper-plane"></i>&nbsp; Enviar y continuar
+        </button>
+    </div>
 
-            const boton = document.getElementById('btnSubmitEdicion');
-            boton.disabled = true;
+    <!-- ══════════════════════════════════════════
+         PAGE 4: PROPUESTA (Webhook 2)
+    ═══════════════════════════════════════════ -->
+    <div id="page-4" class="page">
+        <div class="section-label" style="color:var(--amber);">Mi propuesta</div>
+        <div class="divider" style="background:linear-gradient(90deg,transparent,var(--amber),transparent);"></div>
 
-            try {
-                const res = await fetch(webhookUrlEdicion, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payloadDiscord)
-                });
+        <p style="font-size:13px; font-weight:700; color:#fff; text-align:center; margin-bottom:12px; letter-spacing:.5px;">
+            ¿Por qué prefiero esta opción?
+        </p>
 
-                if (res.ok) {
-                    alert("¡Paso 1 completado con éxito! Pasemos al Paso 2.");
-                    cambiarPagina(4); // Salta directo a la Página 4 de la propuesta
-                } else {
-                    alert("Error en la conexión.");
-                    boton.disabled = false;
-                }
-            } catch (err) {
-                alert("Error de red.");
-                boton.disabled = false;
-            }
-        }
+        <div class="reason-card" style="margin-bottom:8px;">
+            <div class="reason-title">🖥️ 1. Equipo de muy buena calidad</div>
+            <div class="reason-body">Me puede durar perfectamente unos 6 años, así que es una inversión a largo plazo que vale la pena.</div>
+        </div>
 
-        async function enviarWebhookPropuesta() {
-            const opinionTextoPropuesta = document.getElementById('opinionPropuestaInput').value;
+        <div class="reason-card" style="margin-bottom:8px;">
+            <div class="reason-title">🛡️ 2. Un año de garantía</div>
+            <div class="reason-body">Por si pasa cualquier imprevisto, estaré protegido sin preocupaciones.</div>
+        </div>
 
-            if (opinionTextoPropuesta.trim() === "") {
-                alert("Por favor escribe tu opinión o consejo antes de finalizar.");
-                return;
-            }
+        <div class="reason-card" style="margin-bottom:14px;">
+            <div class="reason-title">⚙️ 3. Modificación root</div>
+            <div class="reason-body">Tendré control total del sistema: podré modificarlo al 100%, probar cosas nuevas, aprender más sobre tecnología y sacarle el máximo provecho para mis estudios y proyectos.</div>
+        </div>
 
-            const payloadDiscord = {
-                username: "Sistema de Validación de Propuestas",
-                content: `**NUEVO INFORME DE PROPUESTA RECIBIDO**\n\n**Remitente:** Tía ${tíaSeleccionada}\n**Dudas, Consejos u Opinión Final:** ${opinionTextoPropuesta}`
-            };
+        <div style="margin-bottom:12px;">
+            <label class="field-label">Tu opinión, duda o consejo final:</label>
+            <textarea id="opinionPropuestaInput" class="styled" rows="3"
+                      placeholder="Escribe tus dudas, consejos u opinión final..."></textarea>
+        </div>
 
-            const boton = document.getElementById('btnSubmitPropuesta');
-            boton.disabled = true;
+        <button class="btn-primary btn-amber" onclick="enviarWebhookPropuesta()" id="btnSubmitPropuesta">
+            <i class="fa-solid fa-check-double"></i>&nbsp; Enviar opinión final
+        </button>
 
-            try {
-                const res = await fetch(webhookUrlPropuesta, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payloadDiscord)
-                });
+        <p style="font-size:9px; color:#444; text-align:center; margin-top:10px; font-style:italic; letter-spacing:.5px; line-height:1.6;">
+            Todo esto será posible solo si logro sacar buenas calificaciones en la escuela 🔥
+        </p>
+    </div>
 
-                if (res.ok) {
-                    alert(`¡Muchas gracias Tía ${tíaSeleccionada}! La evaluación completa ha sido guardada en la base de datos.`);
-                    document.getElementById('opinionPropuestaInput').value = "";
-                    boton.innerText = "✓ PROCESO COMPLETADO";
-                } else {
-                    alert("Error al enviar la opinión final.");
-                    boton.disabled = false;
-                }
-            } catch (err) {
-                alert("Error de red.");
-                boton.disabled = false;
-            }
-        }
-    </script>
-</body>
-</html>
+    <!-- ══════════════════════════════════════════
+         PAGE 5: GRACIAS
+    ═══════════════════════════════════════════ -->
+    <div id="page-5" class="page">
+        <div class="thanks-icon">🎉</div>
+        <div class="thanks-title" id="thanksTitle">¡GRACIAS!</div>
+        <div class="confetti-line">✨ 🙏 ✨</div>
+        <p class="thanks-body" id="thanksBody">
+            Tu opinión fue recibida con éxito.<br>
+            Significas mucho para mí. ❤️
+        </p>
+    </div>
+
+</div><!-- /#device -->
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+    /* ─
