@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -391,7 +390,7 @@
         <div class="divider"></div>
         <div class="msg-bubble" id="mensajeOriginalContainer"></div>
         <button class="btn-primary" onclick="cambiarPagina('2')">
-            Ver presentación <i class="fa-solid fa-arrow-right ml-1"></i>
+            Ver presentación <i class="fa-solid fa-arrow-right"></i>
         </button>
     </div>
 
@@ -403,7 +402,7 @@
                     title="Video Presentación" allowfullscreen></iframe>
         </div>
         <button class="btn-primary" onclick="cambiarPagina('3')">
-            Calificar el video <i class="fa-solid fa-star ml-1"></i>
+            Calificar el video <i class="fa-solid fa-star"></i>
         </button>
     </div>
 
@@ -434,7 +433,7 @@
         <div style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.2); border-radius:12px; padding:12px 14px; margin-bottom:14px;">
             <p style="font-size:10px; color:#c9a230; line-height:1.6;">
                 <i class="fa-solid fa-circle-info" style="margin-right:5px;"></i>
-                En el campo de texto ponlo solo tu opinión del video; en la siguiente pantalla podrás compartir tu opinión sobre la propuesta.
+                En el campo de texto pon solo tu opinión del video; en la siguiente pantalla podrás compartir tu opinión sobre la propuesta.
             </p>
         </div>
 
@@ -491,7 +490,9 @@
         </p>
     </div>
 
-</div><div id="toast"></div>
+</div>
+
+<div id="toast"></div>
 
 <script>
     let tiaSeleccionada = "";
@@ -500,19 +501,19 @@
     const webhookUrlEdicion = "https://discord.com/api/webhooks/1491367258470219796/PApu8j67Mnz9GN8JK6vqPCiNlaZvoqnEG9GBEjSBEOXAawRGc_UY-EMXVNnenDxzUjlr";
     const webhookUrlPropuesta = "https://discord.com/api/webhooks/1491657056686571540/CRJs0yxAdBGDf9xu-ViXGb-o9kz92f6JhZcl37n-K8yq6EbCKlm2dwuNZ39TL_3eIMMp";
 
-    // Simulación de barra de carga cyber al inicio
-    window.addEventListener('DOMContentLoaded', () => {
+    // Simulación de carga protegida
+    document.addEventListener('DOMContentLoaded', () => {
         const bar = document.getElementById('progressBar');
         const label = document.getElementById('progressLabel');
-        let progress = 0;
+        if(!bar || !label) return;
         
+        let progress = 0;
         const interval = setInterval(() => {
-            progress += Math.floor(Math.random() * 8) + 4;
+            progress += Math.floor(Math.random() * 12) + 5;
             if (progress >= 100) {
                 progress = 100;
                 clearInterval(interval);
-                setTimeout(() => cambiarPagina('0b'), 400);
+                setTimeout(() => cambiarPagina('0b'), 300);
             }
             bar.style.width = progress + '%';
-            label.innerText = `INICIALIZANDO MÓDULOS... ${progress}%`;
-   
+            label.innerText = `INICIALIZANDO MÓDULOS... ${pro 
